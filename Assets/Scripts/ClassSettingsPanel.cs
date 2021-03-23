@@ -24,7 +24,7 @@ public class ClassSettingsPanel : MonoBehaviour
         int result = 0;
         if(int.TryParse(numGroupsInputField.text, out result))
         {
-            if(result > 9){result = 9;}
+            if(result > 15){result = 15;}
             if(result < 1){result = 1;}
             StaticFileIO.GetActiveData().numGroups = result;
             StaticFileIO.SaveActiveData();

@@ -46,4 +46,36 @@ public class SettingsPanelHelper : MonoBehaviour
             index ++;
         }
     }
+
+    public void OnLoadFromBackupsPressed()
+    {
+        ConfirmationDialogue.AwaitConfirmation(OnConfirmLoadFromBackup,() => { }, "Overwrite current class data from a backup?");
+    }
+
+    private void OnConfirmLoadFromBackup()
+    {
+        string json = GUIUtility.systemCopyBuffer;
+        List<ClassDataset> newClassData = ClassDataOnly.DeSerialize(json);
+        if(newClassData!=null)
+        {
+            StaticFileIO.GetActiveData().loadedClasses = newClassData;
+        }
+        else
+        {
+            Debug.Log("Failed");
+            ConfirmationDialogue.AwaitConfirmation(()=>{}, () => { }, "Backup could not be loaded. Make sure the entire .gdat file is copied to your clipboard.");
+        }
+    }
+
+    public void OnClearUserDataPressed()
+    {
+        ConfirmationDialogue.AwaitConfirmation(OnConfirmDeleteUserData, ()=>{}, "You are about to remove all application data from the registry. This does not remove backups. Continue?");
+    }
+
+    private void OnConfirmDeleteUserData()
+    {
+        PlayerPrefs.DeleteAll();
+        StaticFileIO.Load();
+        ColorThemer.RefreshAll();
+    }
 }

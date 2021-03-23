@@ -23,6 +23,8 @@ public class GroupCanvas : MonoBehaviour
     private void Start() {
         gridPanelRect = gridPanel.GetComponent<RectTransform>();
         transform.localScale = UIStatics.DefaultGroupWindowScale * Vector2.one;
+        currentMaxInLayer++;
+        canvasComponent.sortingOrder = currentMaxInLayer;
     }
 
     public void OnScaleUpPressed()

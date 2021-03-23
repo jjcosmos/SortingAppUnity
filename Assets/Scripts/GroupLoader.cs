@@ -13,6 +13,7 @@ public class GroupLoader : MonoBehaviour
     [SerializeField] float hSpacing;
     [SerializeField] float vSpacing;
     [SerializeField] Vector2 worldOffset;
+    private static readonly float over12Shrink = .9f;
     
     int realNumGroups;
     int targetNumgroups;
@@ -126,11 +127,12 @@ public class GroupLoader : MonoBehaviour
         }
 
         int counter = 0;
+        float adjustedScalar = (realNumGroups > 11) ? over12Shrink : 1;
         foreach(GroupCanvas g in groupCanvass)
         {
             Vector2 newPos;
-            newPos.x = counter % MaxHCount * hSpacing;
-            newPos.y = counter/MaxHCount * -vSpacing;
+            newPos.x = counter % MaxHCount * hSpacing * adjustedScalar;
+            newPos.y = counter/MaxHCount * -vSpacing * adjustedScalar * ((realNumGroups > 12) ? .8f : 1f);
             g.GetComponent<RectTransform>().anchoredPosition = newPos + worldOffset;
             counter++;
         }

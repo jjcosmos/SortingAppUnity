@@ -19,6 +19,12 @@ public class ColorThemer : MonoBehaviour
     private void Start() {
         
     }
+
+    public static void RefreshAll()
+    {
+        _inst.OnLoadFile();
+    }
+
     private void OnLoadFile()
     {
         Debug.Log("Themer on file load");

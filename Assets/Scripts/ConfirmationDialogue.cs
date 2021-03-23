@@ -54,14 +54,14 @@ public class ConfirmationDialogue : MonoBehaviour
 
     public void OnConfirmClicked()
     {
-        acceptAction.Invoke();
         HideDialogue();
+        acceptAction.Invoke();
     }
 
     public void OnCancelClicked()
     {
-        cancelAction.Invoke();
         HideDialogue();
+        cancelAction.Invoke();
     }
 
     private static void HideDialogue()
